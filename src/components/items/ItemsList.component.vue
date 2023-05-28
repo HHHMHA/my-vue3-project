@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h3>Items:</h3>
-    <ul>
+    <h3>Items - loading: {{ loading }}:</h3>
+    <Loader v-show="loading" :show="loading"></Loader>
+    <ul v-show="!loading">
       <ItemComponent v-for="item in items" :key="item.id" :model="item" @select="onItemSelect"/>
     </ul>
   </div>
@@ -10,19 +11,27 @@
 <script lang="ts">
 import {defineComponent, PropType} from "vue";
 import {ItemInterface} from "@/models/items/Item.interface";
+import Loader from "@/components/shared/Loader.component.vue";
 import ItemComponent from "@/components/items/children/Item.component.vue";
 
 export default defineComponent({
   name: "ItemsList.component.vue",
-  components: {ItemComponent},
+  emits: ['selectItem'],
+  components: {
+    ItemComponent,
+    Loader,
+  },
   props: {
     items: {
       type: Array as PropType<ItemInterface[]>,
     },
+    loading: {
+      type: Boolean,
+    }
   },
-  setup() {
+  setup({  }, { emit }) {
     const onItemSelect = (item: ItemInterface) => {
-      item.selected = !item.selected;
+      emit('selectItem', item);
     }
 
     return {
