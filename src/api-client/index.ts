@@ -1,7 +1,6 @@
 import {ApiClientInterface} from "@/models/api-client/ApiClient.interface";
 import apiMockClient from "@/api-client/mock";
 import apiLiveClient from "@/api-client/live";
-import * as process from "process";
 
 let env: string = 'mock';
 
