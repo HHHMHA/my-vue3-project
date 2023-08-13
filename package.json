@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "sinon": "^15.2.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
@@ -16,6 +17,7 @@
   "devDependencies": {
     "@types/chai": "^4.2.11",
     "@types/mocha": "^5.2.4",
+    "@types/sinon": "^10.0.15",
     "@vue/cli-plugin-router": "~4.5.13",
     "@vue/cli-plugin-typescript": "~4.5.13",
     "@vue/cli-plugin-unit-mocha": "~4.5.13",
