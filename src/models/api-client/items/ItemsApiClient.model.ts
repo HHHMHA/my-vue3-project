@@ -1,7 +1,7 @@
 import {ItemsApiClientInterface} from "@/models/api-client/items/ItemsApiClient.interface";
 import {ItemInterface} from "@/models/items/Item.interface";
 import {ItemsApiClientUrlsInterface} from "@/models/api-client/items/ItemsApiClientUrls.interface";
-import axios, {AxiosRequestConfig} from "axios";
+import {HttpClient, HttpRequestParamsInterface} from "@/models/http-client";
 
 export class ItemsApiClientModel implements ItemsApiClientInterface {
     constructor(private readonly urls: ItemsApiClientUrlsInterface) {
@@ -11,19 +11,12 @@ export class ItemsApiClientModel implements ItemsApiClientInterface {
         return new Promise<ItemInterface[]>((resolve) => {
             const url = this.urls.fetchItems;
 
-            const options: AxiosRequestConfig = {
-                headers: {
-
-                }
+            const params: HttpRequestParamsInterface = {
+                url,
+                requiresToken: false,
             };
 
-            axios.get(url, options)
-                .then(response => {
-                    resolve(response.data as ItemInterface[]);
-                })
-                .catch(error => {
-                    console.error('ItemsApiClient: HttpClient: Get: error', error);
-                });
+            return HttpClient.get<ItemInterface[]>(params);
         });
     }
 }
